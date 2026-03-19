@@ -13,7 +13,7 @@ import { NetworkProvider } from "@ton/blueprint";
 // Each transfer costs ~0.15 TON in gas, plan accordingly
 // ============================================================
 
-const JETTON_MASTER_ADDRESS = ""; // Fill after deploy
+const JETTON_MASTER_ADDRESS = "EQBOTg9VpL4KkoQtMW2V3UpEcpsxIoj5cQQoaF3nNwKWGe4W"; // Fill after deploy
 
 // Airdrop list: { address, amount in MOUSE (without decimals) }
 const RECIPIENTS: { address: string; amount: bigint }[] = [

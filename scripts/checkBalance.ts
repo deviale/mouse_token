@@ -12,7 +12,7 @@ import { NetworkProvider } from "@ton/blueprint";
 // Edit JETTON_MASTER_ADDRESS and TARGET_ADDRESS before running
 // ============================================================
 
-const JETTON_MASTER_ADDRESS = ""; // Fill after deploy
+const JETTON_MASTER_ADDRESS = "EQBOTg9VpL4KkoQtMW2V3UpEcpsxIoj5cQQoaF3nNwKWGe4W"; // Fill after deploy
 const TARGET_ADDRESS = "";        // Address to check (leave empty to check your own)
 
 const DECIMALS = 9n;
