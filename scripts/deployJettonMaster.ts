@@ -22,7 +22,7 @@ export async function run(provider: NetworkProvider) {
     console.log("Max Supply:  ", TOTAL_SUPPLY.toString(), "MOUSE");
 
     const jettonMaster = provider.open(
-        await JettonMaster.fromInit(owner, TOTAL_SUPPLY_WITH_DECIMALS, gameBackend, 2n)
+        await JettonMaster.fromInit(owner, TOTAL_SUPPLY_WITH_DECIMALS, gameBackend, 3n)
     );
 
     await jettonMaster.send(
@@ -34,7 +34,7 @@ export async function run(provider: NetworkProvider) {
             amount: TOTAL_SUPPLY_WITH_DECIMALS,
             receiver: owner,
             responseDestination: owner,
-            forwardTonAmount: toNano("0.1"),
+            forwardTonAmount: toNano("0"),
         }
     );
 
