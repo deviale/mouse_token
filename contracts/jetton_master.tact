@@ -147,7 +147,7 @@ contract JettonMaster {
 
     fun buildContent(): Cell {
         // Off-chain metadata — замени URL после загрузки metadata/mouse.json на GitHub
-        let url: String = "https://raw.githubusercontent.com/your-repo/tonsmart/main/metadata/mouse.json";
+        let url: String = "https://raw.githubusercontent.com/deviale/mouse_token/main/metadata/mouse.json";
         let b: StringBuilder = beginString();
         b.append(url);
         return beginCell()
