@@ -7,19 +7,22 @@ import { NetworkProvider } from "@ton/blueprint";
 // ============================================================
 
 const OWNER_ADDRESS = "UQBdAXZ-wu-N-0PxeeVP8mCzERYSDXgMPOA7kHsEArUFGLTq";
+const GAME_BACKEND_ADDRESS = "UQBdAXZ-wu-N-0PxeeVP8mCzERYSDXgMPOA7kHsEArUFGLTq"; // Replace with game backend wallet after deploy
 const TOTAL_SUPPLY = 1_000_000_000n; // 1 billion
 const DECIMALS = 9n;
 const TOTAL_SUPPLY_WITH_DECIMALS = TOTAL_SUPPLY * 10n ** DECIMALS;
 
 export async function run(provider: NetworkProvider) {
     const owner = Address.parse(OWNER_ADDRESS);
+    const gameBackend = Address.parse(GAME_BACKEND_ADDRESS);
 
     console.log("Deploying $MOUSE JettonMaster...");
-    console.log("Owner:", OWNER_ADDRESS);
-    console.log("Max Supply:", TOTAL_SUPPLY.toString(), "MOUSE");
+    console.log("Owner:       ", OWNER_ADDRESS);
+    console.log("Game backend:", GAME_BACKEND_ADDRESS);
+    console.log("Max Supply:  ", TOTAL_SUPPLY.toString(), "MOUSE");
 
     const jettonMaster = provider.open(
-        await JettonMaster.fromInit(owner, TOTAL_SUPPLY_WITH_DECIMALS)
+        await JettonMaster.fromInit(owner, TOTAL_SUPPLY_WITH_DECIMALS, gameBackend)
     );
 
     await jettonMaster.send(
