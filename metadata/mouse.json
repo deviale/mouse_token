@@ -1,0 +1,8 @@
+{
+  "name": "Mouse",
+  "symbol": "MOUSE",
+  "description": "MOUSE is the official token of the Mouse Telegram Mini App game. Earn, collect, and trade MOUSE tokens in the TON ecosystem.",
+  "image": "https://raw.githubusercontent.com/your-repo/tonsmart/main/metadata/mouse.png",
+  "decimals": "9",
+  "social_links": []
+}
