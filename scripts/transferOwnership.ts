@@ -13,7 +13,7 @@ import { NetworkProvider } from "@ton/blueprint";
 //   npx blueprint run transferOwnership --mainnet
 // ============================================================
 
-const JETTON_MASTER_ADDRESS = "EQBOTg9VpL4KkoQtMW2V3UpEcpsxIoj5cQQoaF3nNwKWGe4W"; // Fill after deploy
+const JETTON_MASTER_ADDRESS = "EQDoP8QEEGJxNc0SrHZljEJiFdJPxtL2Swie2QGrmMJgSD53"; // Fill after deploy
 const NEW_OWNER_ADDRESS = "";     // New owner address
 
 export async function run(provider: NetworkProvider) {

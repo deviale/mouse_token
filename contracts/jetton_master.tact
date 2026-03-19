@@ -55,7 +55,7 @@ contract JettonMaster {
     gameBurned: Int as coins;
     manualBurned: Int as coins;
 
-    init(owner: Address, maxSupply: Int, gameBackend: Address) {
+    init(owner: Address, maxSupply: Int, gameBackend: Address, version: Int) {
         self.owner = owner;
         self.maxSupply = maxSupply;
         self.totalSupply = 0;

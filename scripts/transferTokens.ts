@@ -12,7 +12,7 @@ import { NetworkProvider } from "@ton/blueprint";
 // Edit RECIPIENT and AMOUNT before running
 // ============================================================
 
-const JETTON_MASTER_ADDRESS = "EQBOTg9VpL4KkoQtMW2V3UpEcpsxIoj5cQQoaF3nNwKWGe4W"; // Fill after deploy
+const JETTON_MASTER_ADDRESS = "EQDoP8QEEGJxNc0SrHZljEJiFdJPxtL2Swie2QGrmMJgSD53"; // Fill after deploy
 const RECIPIENT_ADDRESS = "";     // Receiver TON address
 const AMOUNT = 1_000_000n;        // Amount of MOUSE (without decimals)
 const DECIMALS = 9n;
