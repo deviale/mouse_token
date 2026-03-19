@@ -27,14 +27,14 @@ export async function run(provider: NetworkProvider) {
 
     await jettonMaster.send(
         provider.sender(),
-        { value: toNano("0.5") },
+        { value: toNano("1.5") }, // Enough TON for contract deploy + JettonWallet deploy + gas
         {
             $$type: "MintTokens",
             queryId: 0n,
             amount: TOTAL_SUPPLY_WITH_DECIMALS,
             receiver: owner,
             responseDestination: owner,
-            forwardTonAmount: toNano("0.05"),
+            forwardTonAmount: toNano("0.1"),
         }
     );
 
