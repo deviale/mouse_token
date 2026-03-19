@@ -1,8 +1,11 @@
 {
   "name": "Mouse",
   "symbol": "MOUSE",
-  "description": "MOUSE is the official token of the Mouse Telegram Mini App game. Earn, collect, and trade MOUSE tokens in the TON ecosystem.",
+  "description": "MOUSE is the official in-game token of the Mouse Telegram Mini App. Earn, spend, and trade MOUSE tokens in the TON ecosystem.",
   "image": "https://raw.githubusercontent.com/deviale/mouse_token/main/metadata/mouse.png",
   "decimals": "9",
-  "social_links": []
+  "social_links": [
+    "https://t.me/mouse_token",
+    "https://x.com/mouse_token"
+  ]
 }

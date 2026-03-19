@@ -126,6 +126,11 @@ contract JettonWallet {
         });
     }
 
+    // FIX: Restore balance if transfer bounces (prevents token loss)
+    bounced(msg: bounced<TokenTransferInternal>) {
+        self.balance += msg.amount;
+    }
+
     // Burn tokens
     receive(msg: TokenBurn) {
         let ctx = context();
@@ -146,6 +151,11 @@ contract JettonWallet {
                 responseDestination: msg.responseDestination,
             }.toCell(),
         });
+    }
+
+    // FIX: Restore balance if burn notification bounces
+    bounced(msg: bounced<TokenBurnNotification>) {
+        self.balance += msg.amount;
     }
 
     // ============================================================

@@ -21,16 +21,6 @@ message(0x9a4f3b2c) SetGameBackend {
     newBackend: Address;
 }
 
-// GameBurn — triggered by game backend when player spends MOUSE on upgrades
-// Backend calls this on player's JettonWallet via TON Connect
-// This message tracks total burned via game for analytics
-message(0x4d736f75) GameBurnNotification {
-    queryId: Int as uint64;
-    amount: Int as coins;
-    player: Address;
-    reason: Int as uint8; // 0=upgrade, 1=skin, 2=boss, 3=season_pass
-}
-
 // ============================================================
 // Structs
 // ============================================================
@@ -58,9 +48,9 @@ contract JettonMaster {
     maxSupply: Int as coins;
     mintable: Bool;
     owner: Address;
-    gameBackend: Address;       // Game backend address (can trigger GameBurn)
+    gameBackend: Address;
 
-    // Burn stats for transparency
+    // Burn stats for on-chain transparency
     totalBurned: Int as coins;
     gameBurned: Int as coins;
     manualBurned: Int as coins;
@@ -106,16 +96,19 @@ contract JettonMaster {
         });
     }
 
-    // Handle standard burn notification from wallet (manual burn)
+    // Handle burn from wallet
+    // gameBackend flag in responseDestination = null means game burn
     receive(msg: TokenBurnNotification) {
         let expectedWallet = contractAddress(initOf JettonWallet(myAddress(), msg.sender));
         require(context().sender == expectedWallet, "JettonMaster: unauthorized burn");
 
         self.totalSupply -= msg.amount;
         self.totalBurned += msg.amount;
-        self.manualBurned += msg.amount;
 
+        // If responseDestination is null — it's a game burn (no refund needed)
+        // If responseDestination set — it's a manual burn (return excess TON)
         if (msg.responseDestination != null) {
+            self.manualBurned += msg.amount;
             send(SendParameters{
                 to: msg.responseDestination!!,
                 value: 0,
@@ -123,27 +116,9 @@ contract JettonMaster {
                 mode: SendRemainingValue,
                 body: TokenExcesses{ queryId: msg.queryId }.toCell(),
             });
+        } else {
+            self.gameBurned += msg.amount;
         }
-    }
-
-    // Handle game burn notification (sent by game backend after player spends tokens)
-    // Flow: player approves TokenBurn → wallet burns → notifies master with GameBurnNotification
-    receive(msg: GameBurnNotification) {
-        let expectedWallet = contractAddress(initOf JettonWallet(myAddress(), msg.player));
-        require(context().sender == expectedWallet, "JettonMaster: unauthorized game burn");
-
-        self.totalSupply -= msg.amount;
-        self.totalBurned += msg.amount;
-        self.gameBurned += msg.amount;
-
-        // Return excess TON to player
-        send(SendParameters{
-            to: msg.player,
-            value: 0,
-            bounce: false,
-            mode: SendRemainingValue,
-            body: TokenExcesses{ queryId: msg.queryId }.toCell(),
-        });
     }
 
     // Update game backend address (only owner)
@@ -152,7 +127,7 @@ contract JettonMaster {
         self.gameBackend = msg.newBackend;
     }
 
-    // Disable minting forever
+    // Disable minting forever (irreversible)
     receive("DisableMint") {
         require(context().sender == self.owner, "JettonMaster: not owner");
         self.mintable = false;
@@ -164,7 +139,7 @@ contract JettonMaster {
         self.owner = msg.newOwner;
     }
 
-    // Handle bounced mint
+    // Restore totalSupply if mint bounces
     bounced(msg: bounced<TokenTransferInternal>) {
         self.totalSupply -= msg.amount;
     }
@@ -203,7 +178,6 @@ contract JettonMaster {
         return self.gameBackend;
     }
 
-    // Burn stats — shown on explorer, builds trust
     get fun get_burn_stats(): BurnStats {
         return BurnStats{
             totalBurned: self.totalBurned,
@@ -216,13 +190,15 @@ contract JettonMaster {
     // Internal helpers
     // ============================================================
 
+    // TEP-64 off-chain metadata
+    // 0x01 flag + URL string in ref cell
     fun buildContent(): Cell {
         let url: String = "https://raw.githubusercontent.com/deviale/mouse_token/main/metadata/mouse.json";
-        let b: StringBuilder = beginString();
-        b.append(url);
+        let sb: StringBuilder = beginString();
+        sb.append(url);
         return beginCell()
             .storeUint(0x01, 8)
-            .storeRef(b.toCell())
+            .storeRef(sb.toCell())
             .endCell();
     }
 }
