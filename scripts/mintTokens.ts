@@ -7,7 +7,7 @@ import { NetworkProvider } from "@ton/blueprint";
 // Run this if initial mint failed during deploy
 // ============================================================
 
-const JETTON_MASTER_ADDRESS = "EQDoP8QEEGJxNc0SrHZljEJiFdJPxtL2Swie2QGrmMJgSD53";
+const JETTON_MASTER_ADDRESS = "EQCeYQn_fua9g69y3ZXRPDdr6epHIOg6vhrZGkeeIwmzW01H";
 const OWNER_ADDRESS = "UQBdAXZ-wu-N-0PxeeVP8mCzERYSDXgMPOA7kHsEArUFGLTq";
 
 const TOTAL_SUPPLY = 1_000_000_000n;

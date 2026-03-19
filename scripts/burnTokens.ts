@@ -14,7 +14,7 @@ import { NetworkProvider } from "@ton/blueprint";
 //   npx blueprint run burnTokens --mainnet
 // ============================================================
 
-const JETTON_MASTER_ADDRESS = "EQDoP8QEEGJxNc0SrHZljEJiFdJPxtL2Swie2QGrmMJgSD53"; // Fill after deploy
+const JETTON_MASTER_ADDRESS = "EQCeYQn_fua9g69y3ZXRPDdr6epHIOg6vhrZGkeeIwmzW01H"; // Fill after deploy
 
 // Choose one mode:
 const BURN_PERCENT = 0;           // e.g. 10 = burn 10% of your balance

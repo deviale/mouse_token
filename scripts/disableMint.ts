@@ -13,7 +13,7 @@ import { NetworkProvider } from "@ton/blueprint";
 //   npx blueprint run disableMint --mainnet
 // ============================================================
 
-const JETTON_MASTER_ADDRESS = "EQDoP8QEEGJxNc0SrHZljEJiFdJPxtL2Swie2QGrmMJgSD53"; // Fill after deploy
+const JETTON_MASTER_ADDRESS = "EQCeYQn_fua9g69y3ZXRPDdr6epHIOg6vhrZGkeeIwmzW01H"; // Fill after deploy
 
 export async function run(provider: NetworkProvider) {
     if (!JETTON_MASTER_ADDRESS) {
